@@ -1,0 +1,113 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+
+}
+.bg-container{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    
+    grid-gap: 5px;
+    background-image: url(./pics/paper.jpg);
+    /* background: linear-gradient(
+        35deg,blue,grey
+    ); */
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    padding: 5px;
+    transform-origin: top left;
+
+    transform: skewX(20deg) scale(1.2) translateX(-15%) translateY(-5%);
+    
+
+}
+.ani{
+    height: 290px;
+    border: 2px solid black;
+    box-shadow: -1px -1px black;
+    transform: translate(0px,0px);
+    animation: popupAnimation 3s ease-in-out infinite alternate; 
+}
+.logo{
+    position: absolute;
+    z-index: 30;
+    left: 60px;    
+    top: 20px;
+    height: 55px;
+    width: 115px;
+    background-color: white;
+    background-position: center;
+    overflow: hidden;
+    justify-content: center ;
+    align-items: center;
+    display: flex;
+    border-radius: 10px;
+}
+.logo img{
+    width: 130px;
+    height: 130px;
+}
+.delayed{
+    animation-delay: 3s;
+}
+@keyframes popupAnimation{
+    0%{
+
+    }
+    100%{
+        box-shadow: -3px -3px black;
+        transform: translate(2px,2px);
+    }
+}
+.filter{
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    background: linear-gradient(
+        42deg,
+        rgba(0, 109, 193, 0.317),
+        rgba(0,115,138,0.1)
+        
+      )
+}
+.direct-link-btn{
+    font-family: 'Bangers','cursive';
+    font-size: large;
+        transition: linear 0.2s;
+        transition: linear 0.2s;
+        border: 1px solid black;
+        box-shadow: 2px 2px black;
+}
+
+.signin-btn{
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: large;
+        transition: linear 0.2s;
+        transition: linear 0.2s;
+        border: 1px solid black;
+        box-shadow: 2px 2px black;
+}
+.direct-link-btn:hover{
+    transform: translate(-2px,-2px);
+    box-shadow: 4px 4px black;
+}
+.signin-btn:hover{
+    transform: translate(-2px,-2px);
+    box-shadow: 4px 4px black;
+}
+@media only screen and (max-height:510px) {
+    .bg-container{
+        transform: skewX(20deg) scale(1.2) translateX(-15%) translateY(-17%);
+
+    }
+}

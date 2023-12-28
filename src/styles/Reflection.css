@@ -1,0 +1,190 @@
+.headCard img{
+    filter: grayscale(30);
+    animation: cardColor 1.5s ease-in 1s forwards;
+}
+
+
+.headReflection{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(to right, rgba(255,255,255,0),rgba(255,255,255,0.5));
+    transform-origin: bottom left;
+    transform:  rotate(45deg) translate(-150%,150%);
+    animation: movieHeadReflection 3s ease-in-out 1s forwards;
+}
+@keyframes movieHeadReflection {
+    0% {
+        transform: rotate(45deg) translate(-150%, 150%);
+    }
+    100% {
+        transform: rotate(45deg) translate(150%, -150%);
+    }
+}
+@keyframes cardColor {
+    0%{
+        filter: grayscale(30);
+    }
+    100%{
+        filter: grayscale(0);
+    }
+}
+@keyframes cardColor {
+    0%{
+        filter: grayscale(30);
+    }
+    100%{
+        filter: grayscale(0);
+    }
+}
+
+
+.card img{
+    filter: grayscale(100);
+    transition: 0.2s linear;
+}
+
+.card{
+}
+.innderCard{}
+.reflection{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 550px;
+    height: 550px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5));
+    transform-origin: bottom left;
+    transform: rotate(45deg) translate(-150%, 150%);
+}
+.card:hover .reflection {
+    transform: rotate(45deg) translate(150%, -150%);
+    transition:  2.5s ease-in-out;
+    transition-delay: 0.5s;
+
+}
+.card:hover .innderCard{
+    transform: translateX(-50%);
+}
+.card:hover img{
+    filter: grayscale(0);
+}
+/* .card:hover .characterInfoBox{
+    transform: translateX(10%);
+} */
+
+/* .characterInfoBox{
+    background-image: url(../pics/image/paper.jpg);
+} */
+.characterInfoBoxDes::-webkit-scrollbar {
+    display: none;
+  }
+  .characterInfoBoxName::-webkit-scrollbar {
+    display: none;
+  }
+  .box-info-btn{
+    display: none;
+    transition: all 0.1s ease-in-out;
+
+  }
+  .card:hover .box-info-btn{
+    display: inline-flex;
+
+  }
+
+  .characterInfoBox{
+    transform: translateX(-50%);
+    transition: all 0.1s ease-in-out;
+  }
+  .card:hover .characterInfoBox{
+    transform: translateX(0%);
+  }
+
+
+  /* for error paper */
+  .paper{
+    transform: rotateX(75deg);
+  }
+
+  .person-controler .second{
+    display: none;
+  }
+  .person-controler:hover .second{
+    display: block;
+  }
+  .person-controler:hover .first{
+    display: none;
+  }
+  .message {
+    display: none;
+    transition: display 0s ease-in-out 1s; /* Initial delay set to 1 second */
+  }
+  
+  .person-controler:hover .message {
+    display: block;
+    transition: display 0s ease-in-out; /* Resetting the transition property */
+  }
+
+
+  /* shiled animaiton */
+  .shield-first{
+    background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+    animation: shieldBgRemove 2s 1s ease-in-out infinite ;
+  }
+  .shield-sec{
+    color: rgb(220 38 38 / var(--tw-bg-opacity));
+    animation: shieldTextRemove 2s 1s ease-in-out infinite ;
+  }
+
+  @keyframes shieldBgRemove {
+    0%{
+      background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+    }
+    100%{
+      background-color: transparent;
+    }
+  }
+  @keyframes shieldTextRemove {
+    0%{
+      color: rgb(220 38 38 / var(--tw-bg-opacity));
+    }
+    100%{
+      color: #1f1f1f;
+    }
+  }
+
+
+
+  /* for sideBar */
+  .sideBarShow{
+    transition: all 0.3s ease-in-out;
+    transform: translateX(0%);
+
+  }
+  .sideBar{
+    transform: translateX(100%);
+    transition: all 0.3s ease-in-out;
+  }
+
+  @media (min-width: 540px) {
+    .sideBar ,.sideBarShow {
+        width: 200px;
+    }
+}
+@media (max-width: 540px) {
+  .sideBar ,.sideBarShow {
+      width: 200px;
+  }
+}
+
+.guideTextFromForm{
+  position: absolute;
+  bottom: -20px;
+}
+@media (max-width: 470px) {
+  .guideTextFromForm {
+    bottom: -40px;
+  }
+}
