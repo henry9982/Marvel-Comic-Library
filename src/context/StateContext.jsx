@@ -1,6 +1,6 @@
 import axios from 'axios'
 import md5 from 'md5'
-import React, { createContext, useContext, useEffect, useReducer, useState } from 'react'
+import React, { createContext, useContext, useEffect, useReducer, useRef, useState } from 'react'
 
 export const StateContext = createContext(null)
 
@@ -13,6 +13,7 @@ const initialState = {
   popularComics:[],
   fetchedCharacters:[],
   fetchedComics:[],
+  fetchedComicsByCharcaterId:[],
   loading:false,
   loadingForDefault:false,
   loadingForDefaultComic:false,
@@ -25,6 +26,7 @@ const initialState = {
   apiLimitReached:false,
   usedSearch:false,
   usedSearchComic:false,
+  isUsingFetchCmsByCh:false,
 }
 const reducer = (state,action)=>{
   switch(action.type){
@@ -67,7 +69,11 @@ const reducer = (state,action)=>{
     case 'SET_USED_SEARCH':
       return {...state,usedSearch:action.payload};
     case 'SET_USED_SEARCH_COMIC':
-      return {...state,usedSearchComic:action.payload}
+      return {...state,usedSearchComic:action.payload};
+    case "SET_IS_USING_FETCH_CMS_BY_CH":
+      return {...state,isUsingFetchCmsByCh:action.payload}
+    case 'SET_COMICS_BY_CHARACTER_ID':
+      return {...state,fetchedComicsByCharcaterId:action.payload}
     default:
       return state;
   }
@@ -181,6 +187,24 @@ const StateContextProvider = ({children}) => {
       return null
     }
   }
+
+  const getComicsByCharacter = async(id)=>{
+    const timeStamp = new Date().getTime()
+    const hash = generateHash(timeStamp)
+    const url = `https://gateway.marvel.com:443/v1/public/characters/${id}/comics?apikey=${publicKey}&hash=${hash}&ts=${timeStamp}&limit=50`
+    try {
+      const response = await axios.get(url)
+      const comicData = response.data.data.results
+      console.log(comicData);
+      return comicData
+    } catch (error) {
+      console.error(error.response.status);
+      error.response.status === 429 && dispatch({type:'SET_API_LIMIT_REACHED',payload:true})
+      return null
+    }
+  }
+
+
 
  
 
@@ -307,6 +331,19 @@ const StateContextProvider = ({children}) => {
       dispatch({type:'SET_LOADING_FOR_SEARCH_CM',payload:false})
     }
 
+    // for fetching comics by character id
+    const fetchComicsByCharcaterId = async (id)=>{
+      dispatch({type:'SET_IS_USING_FETCH_CMS_BY_CH',payload:true})
+      dispatch({type:'SET_LOADING',payload:true});
+      const data = await getComicsByCharacter(id)
+      dispatch({type:'SET_COMICS_BY_CHARACTER_ID',payload:data})
+      dispatch({type:'SET_LOADING',payload:false});
+    }
+
+    const setFasleToShowDefaultComics = ()=>{
+      dispatch({type:'SET_IS_USING_FETCH_CMS_BY_CH',payload:false})
+    }
+
 
 
     const setIfSearchInputIsEmpty = ()=>{
@@ -323,6 +360,18 @@ const StateContextProvider = ({children}) => {
       setIsSidebarVisible((prev) => !prev);
     };
 
+    // for dialog
+    const dialogRef = useRef()
+    
+  const openDialog = () => {
+    dialogRef.current?.showModal()
+  };
+
+  const closeDialog = () => {
+    dialogRef.current?.close()
+  };
+
+
 
     const data = {
       state,
@@ -334,6 +383,11 @@ const StateContextProvider = ({children}) => {
       toggleSidebar,
       setIfSearchInputIsEmpty,
       setIfSearchComicInputIsEmpty,
+      fetchComicsByCharcaterId,
+      setFasleToShowDefaultComics,
+      dialogRef,
+      openDialog,
+      closeDialog,
     }
   return (
     <StateContext.Provider value={data}>

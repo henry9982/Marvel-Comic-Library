@@ -1,17 +1,31 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { StateContext } from '../context/StateContext';
 import "../styles/Reflection.css"
 import { TbUserSearch } from "react-icons/tb";
 import CharacterCard from '../components/CharacterCard';
 import { IoIosArrowDown } from "react-icons/io";
 import ApiLimitError from '../components/ApiLimitError';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Characters = () => {
-  const { state, showMoreDefaultFetching ,searchFetchingCharacters,setIfSearchInputIsEmpty} = useContext(StateContext);
+  const { state, showMoreDefaultFetching ,searchFetchingCharacters,setIfSearchInputIsEmpty,fetchComicsByCharcaterId,dialogRef,closeDialog,openDialog} = useContext(StateContext);
   const { defaultCharacters,loadingForMoreCh, loading,loadingForDefault,loadingForSearchCh, moreDefaultCharacters, popularCharacters,fetchedMore,apiLimitReached ,fetchedCharacters,usedSearch} = state;
   const [clickedShowMore, setClickedShowMore] = useState(false);
+
+  useEffect(()=>{
+    console.dir(dialogRef.current);
+  },[dialogRef])
+
+
+
+
+  const navigate = useNavigate()
+  const handleClick = (id)=>{
+    fetchComicsByCharcaterId(id)
+    navigate('/home/comics')
+  }
 
   const [searchName,setSearchName] = useState('')
 
@@ -33,6 +47,7 @@ const Characters = () => {
         <div>Loading</div>
       ) : (
         apiLimitReached?<ApiLimitError/>:<>
+
         <div className='flex flex-col justify-center items-center py-5 gap-5 bg-[rgb(22,22,22)]'>
             <div className='flex text-white gap-4 font-poopins text-xs max-[400px]:text-[10px] font-semibold -translate-y-2'>
             {popularCharacters && popularCharacters.length===5&&popularCharacters.map(character=>{
@@ -47,7 +62,9 @@ const Characters = () => {
             <div className='flex flex-wrap justify-center items-center gap-5'>
             {popularCharacters && popularCharacters.length>0&&popularCharacters.map((character,length)=>{
                 return (<div key={character.id} className='flex flex-col gap-3'>
-                    <div className='h-[250px] w-[180px] max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px] border-white border-2 headCard overflow-hidden relative transition duration-300 hover:-translate-y-5 hover:shadow-lg shadow-white '>
+                    <div onClick={()=>{
+                      handleClick(character.id)
+                    }} className='h-[250px] w-[180px] max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px] border-white border-2 headCard overflow-hidden relative transition duration-300 hover:-translate-y-5 hover:shadow-lg shadow-white '>
                         <img className='h-full w-full object-cover' src={`${character.thumbnail.path}.${character.thumbnail.extension}`} alt="" />
                         <div className='headReflection'></div>
                     </div>
@@ -75,7 +92,7 @@ const Characters = () => {
           
           {usedSearch?<>{
             loadingForSearchCh?(<div>Loading For Searching</div>):<>
-                <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-10'>
+                <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-16'>
                 {
                   fetchedCharacters && fetchedCharacters.length > 0 ? (
                     fetchedCharacters.map((character) => {
@@ -90,7 +107,7 @@ const Characters = () => {
           }</>:<>
           {loadingForDefault?(<div>Loaidng Default Characters</div>):<>
               <div className='flex flex-col'>
-                <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-10'>
+                <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-16'>
                   {
                     defaultCharacters && defaultCharacters.length > 0 ? (
                       defaultCharacters.map((character) => {

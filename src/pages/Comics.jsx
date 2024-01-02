@@ -5,17 +5,21 @@ import { AiOutlineFileSearch } from "react-icons/ai";
 import CharacterCard from '../components/CharacterCard';
 import { IoIosArrowDown } from "react-icons/io";
 import ComicCard from '../components/ComicCard';
+import '../styles/Button.css'
 
 const Comics = () => {
-  const { state,showMoreDefaultCmFetching,searchFetchingComics,setIfSearchComicInputIsEmpty} = useContext(StateContext);
-  const { loading,popularComics,apiLimitReached,defaultComics,loadingForDefaultComic,loadingForMoreCm,moreDefaultComics,fetchedMoreCm,usedSearchComic,fetchedComics,loadingForSearchCm} = state;
+  const { state,showMoreDefaultCmFetching,searchFetchingComics,setIfSearchComicInputIsEmpty,setFasleToShowDefaultComics,openDialog} = useContext(StateContext);
+  const { loading,popularComics,apiLimitReached,defaultComics,loadingForDefaultComic,loadingForMoreCm,moreDefaultComics,fetchedMoreCm,usedSearchComic,fetchedComics,loadingForSearchCm,fetchedComicsByCharcaterId,isUsingFetchCmsByCh} = state;
   const [clickedShowMore, setClickedShowMore] = useState(false);
 
   const [searchTitle,setSearchTitle] = useState('')
 
   useEffect(()=>{
-    console.log(popularComics);
-  },[popularComics])
+    console.log(fetchedComicsByCharcaterId);
+    console.log(isUsingFetchCmsByCh);
+
+  },[fetchedComicsByCharcaterId])
+
 
   useEffect(()=>{
     if (searchTitle==='') {
@@ -33,7 +37,26 @@ const Comics = () => {
       {loading ? (
         <div>Loading</div>
       ) :(apiLimitReached?<ApiLimitError/>:<>
-        <div className='flex flex-col justify-center items-center py-5 gap-5 bg-[rgb(22,22,22)]'>
+        {isUsingFetchCmsByCh?<>
+          <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-28 relative'>
+            {/* <div className=' font-poopins absolute -top-16 right-24 cursor-pointer' onClick={setFasleToShowDefaultComics}>Show Default Comics</div> */}
+            <div className='absolute -top-20  w-full  flex sm:justify-end justify-center sm:px-20 '>
+              <button class="button-49 font-poopins w-fit " role="button" onClick={setFasleToShowDefaultComics}>Show Default Comics</button>
+            </div>
+
+                {
+                  fetchedComicsByCharcaterId && fetchedComicsByCharcaterId.length > 0 ? (
+                    fetchedComicsByCharcaterId.map((comic) => {
+                      return <ComicCard key={comic.id} comic={comic}/>; 
+                    })
+                  ) : (
+                    <div>Sorry no comics found</div>
+                  )
+                }
+                </div>
+        </>:<>
+
+          <div className='flex flex-col justify-center items-center py-5 gap-5 bg-[rgb(22,22,22)]'>
 
             {popularComics && popularComics.length===5&&(
                 <div className='text-white font-banger tracking-widest -translate-y-3'>
@@ -42,12 +65,13 @@ const Comics = () => {
             )}
             <div className='flex flex-wrap justify-center  gap-5 bg- items-stretch'>
             {popularComics && popularComics.length>0&&popularComics.map((comic,length)=>{
+                const detailUrl = comic.urls.find(element=>element['type']==="detail").url
                 return (<div key={comic.id} className='flex flex-col gap-3 flex-wrap   '>
-                    <div className='h-[250px] w-[180px] max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px] border-white border-2 headCard overflow-hidden relative transition duration-300 hover:-translate-y-5 hover:shadow-lg shadow-white '>
+                    <a href={detailUrl} target='_blank' className='h-[250px] w-[180px] max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px] border-white border-2 headCard overflow-hidden relative transition duration-300 hover:-translate-y-5 hover:shadow-lg shadow-white '>
                         <img className='h-full w-full object-cover' src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} alt="" />
                         <div className='headReflection'></div>
-                    </div>
-                    <div className='flex items-center gap-3 w-[180px]'>
+                    </a>
+                    <div className='flex items-center gap-3 w-[180px] max-lg:w-[150px] max-[850px]:w-[130px]'>
                         <div className='text-white font-poopins font-semibold place-self-start'>
                             {length+1}
                         </div>
@@ -71,7 +95,7 @@ const Comics = () => {
 
           {usedSearchComic?<>{
             loadingForSearchCm?(<div>Loading For Searching</div>):<>
-                <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-10'>
+                <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-16'>
                 {
                   fetchedComics && fetchedComics.length > 0 ? (
                     fetchedComics.map((comic) => {
@@ -86,7 +110,7 @@ const Comics = () => {
           }</>:<>
           {loadingForDefaultComic?(<div>Loaidng Default Comics</div>):<>
               <div className='flex flex-col'>
-                <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-10'>
+                <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-16'>
                   {
                     defaultComics && defaultComics.length > 0 ? (
                       defaultComics.map((comic) => {
@@ -125,6 +149,7 @@ const Comics = () => {
             </>}
             </>}
 
+        </>}
       </>)}
     </>
   )

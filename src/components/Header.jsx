@@ -8,12 +8,14 @@ import { GiClockwork } from "react-icons/gi";
 import { TiThMenuOutline } from "react-icons/ti";
 
 import { auth } from '../config/firebase-config';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SideBar from './SideBar';
 import { StateContext } from '../context/StateContext';
+import { signOut } from 'firebase/auth';
 
 const Header = () => {
-    const {isSidebarVisible,toggleSidebar} = useContext(StateContext)
+    const {isSidebarVisible,toggleSidebar,setFasleToShowDefaultComics} = useContext(StateContext)
+    const navigate = useNavigate()
     
     const [userName,setUserName] = useState()
     useEffect(()=>{
@@ -25,6 +27,14 @@ const Header = () => {
             console.log(firstName);
         }
     },[])
+    const signUserOut = async()=>{
+        try {
+            await signOut(auth)
+            navigate('/signIn')
+        } catch (error) {
+            console.error(error);
+        }
+    }
   return (
     <header className='bg-[#1f1f1f]'>
         <div className='flex justify-center border-t-0 border border-x-0 border-[#3e3e3e]'>
@@ -49,11 +59,13 @@ const Header = () => {
                     <div className='text-2xl mr-3 relative'>
                         <GiClockwork className='text-3xl text-green-400' title='Read later'/>
                     </div>
-                    <div className='flex flex-col justify-center items-center h-full font-poopins border-y-0 border px-2 text-white uppercase border-[#3e3e3e]'>
+                    <div className='flex flex-col gap-1 justify-center items-center h-full font-poopins border-y-0 border px-2 text-white uppercase border-[#3e3e3e]'>
                         {
-                            userName?(<>                        <FaUserAstronaut className='text-xl'/>
-                            <div className='text-xs'>have signed in</div></>):(<>                        <FaUserNinja className='text-xl'/>
-                        <div className='text-xs'>haven't signed in</div></>)
+                            userName?(<>                        <FaUserAstronaut title='have signed in' className='animate-pulse hover:scale-105 transition'/>
+                            <div className='text-xs border px-1 cursor-pointer hover:scale-105 transition' onClick={signUserOut}>Log out</div></>):(<>                        <FaUserNinja title="haven't signed in" className="animate-pulse hover:scale-105 transition"/>
+                        <div onClick={()=>{
+                            navigate('/signIn')
+                        }} className='text-xs border px-1 cursor-pointer hover:scale-105 transition'>Login in</div></>)
                         }
 
                     </div>
@@ -65,12 +77,15 @@ const Header = () => {
                 <Link to={'/home'} className='border-e pe-2 -ml-10 h-full flex justify-center transition items-center border-[#3e3e3e] hover:text-zinc-400'>
                     characters
                 </Link>
-                <Link to={'/home/comics'} className='hover:text-zinc-400 transition'>
+                <Link  to={'/home/comics'} className='hover:text-zinc-400 transition'>
                     comics
                 </Link>
+                {/* <Link onClick={setFasleToShowDefaultComics} to={'/home/comics'} className='hover:text-zinc-400 transition'>
+                    comics
+                </Link> */}
             </div>
         </div>
-        <div className='bg-[#1f1f1f] w-fit cursor-pointer fixed p-[5px] sm:hidden  rounded-full right-3 top-[10px]' onClick={toggleSidebar}>
+        <div className='bg-[#1f1f1f] w-fit cursor-pointer fixed p-[5px] sm:hidden z-40 rounded-full right-3 top-[10px]' onClick={toggleSidebar}>
             <TiThMenuOutline className='text-white text-2xl   '/>
         </div>
 

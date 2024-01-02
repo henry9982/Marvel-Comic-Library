@@ -9,10 +9,15 @@ import { SiMarvelapp } from 'react-icons/si'
 
 const SignIn = () => {
   const navigate = useNavigate()
-  const signInWithGoogle =async ()=>{
-    const results = await signInWithPopup(auth,provider)
-    navigate('/home')
-  }
+  const signInWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      navigate('/home');
+    } catch (error) {
+      console.error('Google authentication error:', error);
+      // Handle the error - display a message, log it, or take appropriate action
+    }
+  };
   return (
     <div className='whole-container h-screen w-screen flex justify-center items-center'>
         <div className='bg-container -z-20'>
