@@ -14,8 +14,9 @@ import { StateContext } from '../context/StateContext';
 import { signOut } from 'firebase/auth';
 
 const Header = () => {
-    const {isSidebarVisible,toggleSidebar,setFasleToShowDefaultComics} = useContext(StateContext)
+    const {isSidebarVisible,toggleSidebar,setFasleToShowDefaultComics,openDialog} = useContext(StateContext)
     const navigate = useNavigate()
+    const user = auth.currentUser
     
     const [userName,setUserName] = useState()
     useEffect(()=>{
@@ -35,6 +36,21 @@ const Header = () => {
             console.error(error);
         }
     }
+
+    const clickToFavCh = ()=>{
+        if (user===null) {
+            openDialog()
+            return
+        }
+        navigate('/home/favCharacters')
+    }
+    const clickToReadLaterCm = ()=>{
+        if (user===null) {
+            openDialog()
+            return
+        }
+        navigate('/home/readLaterComics')
+    }
   return (
     <header className='bg-[#1f1f1f]'>
         <div className='flex justify-center border-t-0 border border-x-0 border-[#3e3e3e]'>
@@ -51,12 +67,12 @@ const Header = () => {
                     <img className='w-32 h-32 max-w-none' src="/src/pics/image/MR-oladinocom-svg170723t001-1772023133411-1-removebg-preview.png" alt="" />
                 </div>
                 <div className='sm:flex gap-2 border hidden  h-full justify-center items-center pl-5 border-y-0 border-[#3e3e3e]'>
-                    <div title='Favorite' className='  shield-first flex justify-center items-center p-[2px] pr-[2px] rounded-full'>
+                    <div onClick={clickToFavCh}  title='Favorite' className='cursor-pointer  shield-first flex justify-center items-center p-[2px] pr-[2px] rounded-full'>
                         <div className='text-2xl bg-white rounded-full'>
                             <MdStars className=' shield-sec'/>
                         </div>
                     </div>
-                    <div className='text-2xl mr-3 relative'>
+                    <div onClick={clickToReadLaterCm} className='text-2xl mr-3 relative cursor-pointer'>
                         <GiClockwork className='text-3xl text-green-400' title='Read later'/>
                     </div>
                     <div className='flex flex-col gap-1 justify-center items-center h-full font-poopins border-y-0 border px-2 text-white uppercase border-[#3e3e3e]'>

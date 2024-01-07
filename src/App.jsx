@@ -7,6 +7,8 @@ import SignIn from './pages/SignIn.jsx'
 import './App.css'
 import Characters from './pages/Characters.jsx'
 import Comics from './pages/Comics.jsx'
+import FavoriteCh from './pages/FavoriteCh.jsx'
+import FavoriteCm from './pages/FavoriteCm.jsx'
 
 const App = () => {
   const [isLoggedIn,setIsLoggedIn] = useState(null) 
@@ -37,6 +39,9 @@ const App = () => {
         <Route path='/home' element={<Home/>}>
            <Route index element={<Characters/>}/>
            <Route path='/home/comics' element={<Comics/>}/>
+           <Route path='/home/favCharacters' element={<FavoriteCh/>}/>
+           <Route path='/home/readLaterComics' element={<FavoriteCm/>}/>
+
         </Route>
       </Routes>
     </BrowserRouter>

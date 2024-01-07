@@ -6,6 +6,8 @@ import CharacterCard from '../components/CharacterCard';
 import { IoIosArrowDown } from "react-icons/io";
 import ApiLimitError from '../components/ApiLimitError';
 import { useNavigate } from 'react-router-dom';
+import { MdOutlinePerson4 } from "react-icons/md";
+
 
 
 
@@ -44,7 +46,63 @@ const Characters = () => {
   return (
     <>
       {loading ? (
-        <div>Loading</div>
+        <>
+<div className='flex flex-col justify-center items-center py-5 gap-5 bg-[rgb(22,22,22)]'>
+            <div className='flex text-white animate-pulse  -translate-y-2 bg-gray-200 w-[370px] h-[18px]'></div>
+
+            <div className='text-white font-banger tracking-widest -translate-y-3 w-[280px] h-[20px] bg-gray-200 animate-pulse'></div>
+
+            <div className='flex flex-wrap justify-center items-center gap-5'>
+
+                <div className='flex flex-col gap-3 '>
+                    <div className='h-[250px] w-[180px] bg-gray-200 animate-pulse max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px]  headCard overflow-hidden relative transition duration-300  '>
+
+                    </div>
+                    <div className='h-[20px] w-[120px] bg-gray-200 animate-pulse'>
+
+                    </div>
+                </div>
+
+                <div className='flex flex-col gap-3 '>
+                    <div className='h-[250px] w-[180px] bg-gray-200 animate-pulse max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px]  headCard overflow-hidden relative transition duration-300  '>
+
+                    </div>
+                    <div className='h-[20px] w-[120px] bg-gray-200 animate-pulse'>
+
+                    </div>
+                </div>
+
+                <div className='flex flex-col gap-3 '>
+                    <div className='h-[250px] w-[180px] bg-gray-200 animate-pulse max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px]  headCard overflow-hidden relative transition duration-300  '>
+
+                    </div>
+                    <div className='h-[20px] w-[120px] bg-gray-200 animate-pulse'>
+
+                    </div>
+                </div>
+                <div className='flex flex-col gap-3 '>
+                    <div className='h-[250px] w-[180px] bg-gray-200 animate-pulse max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px]  headCard overflow-hidden relative transition duration-300  '>
+
+                    </div>
+                    <div className='h-[20px] w-[120px] bg-gray-200 animate-pulse'>
+
+                    </div>
+                </div>
+                <div className='flex flex-col gap-3 '>
+                    <div className='h-[250px] w-[180px] bg-gray-200 animate-pulse max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px]  headCard overflow-hidden relative transition duration-300  '>
+
+                    </div>
+                    <div className='h-[20px] w-[120px] bg-gray-200 animate-pulse'>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+              <div className='bg-gray-200 animate-pulse w-[775px] h-[16px] max-[800px]:w-11/12'></div>
+          </div>
+        </>
       ) : (
         apiLimitReached?<ApiLimitError/>:<>
 
@@ -84,14 +142,45 @@ const Characters = () => {
             </div>
           </div>
 
+          
+
           <form onSubmit={handleSubmit} className=' relative items-center gap-2 flex bg-transparent border-b-2 border-black mt-5 w-[85%] mx-auto'>
             <TbUserSearch  type='submit' className='sm:text-3xl text-2xl'/>
             <input value={searchName} onChange={(e)=>{setSearchName(e.target.value)}} className='uppercase sm:text-3xl text-xl max-[350px]:text-lg flex-1 bg-transparent font-poopins border-none outline-none font-medium' placeholder='Search' type="text" name="" id="" />
             <small className='guideTextFromForm max-sm:text-xs'>In this search box you can search character by name (e.g. Spider-Man or Sp)</small>
           </form>
+
+          {usedSearch?<>{loadingForSearchCh?<></>:<>
+            {
+              fetchedCharacters && fetchedCharacters.lenght>0?<></>:<>
+                  <div className='mt-20 w-fit mx-auto flex flex-col items-center font-poopins'>
+                        <h1 className='text-4xl font-banger tracking-widest text-red-400'>Whoops!</h1>
+                        <div className='text-3xl w-[50px] icon-container h-[50px] hover:scale-95 hover:bg-black hover:text-white transition border-2  relative flex items-center justify-center border-black rounded-full'>
+                          <MdOutlinePerson4/>
+                          <div className='h-[3px] child w-full hover:bg-black transition bg-white absolute rotate-45'></div>
+                        </div>
+                        <p className='font-medium text-lg'>Sorry, no characters found</p>
+                        <small className='text-gray-400'>Please try again with a different name</small>
+                    </div>
+              </>
+            }
+          </>}</>:<></>}
+          
           
           {usedSearch?<>{
-            loadingForSearchCh?(<div>Loading For Searching</div>):<>
+            loadingForSearchCh?(<>
+            <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-16'>
+                  <div className='relative flex justify-center items-center w-fit  mx-auto'>
+                    <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
+                  </div>
+                  <div className='relative max-sm:hidden flex justify-center items-center w-fit  mx-auto'>
+                    <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
+                  </div>
+                  <div className='relative max-lg:hidden flex justify-center items-center w-fit  mx-auto'>
+                    <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
+                  </div>
+              </div>
+            </>):<>
                 <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-16'>
                 {
                   fetchedCharacters && fetchedCharacters.length > 0 ? (
@@ -99,13 +188,25 @@ const Characters = () => {
                       return <CharacterCard key={character.id} character={character}/>; 
                     })
                   ) : (
-                    <div>Sorry no characters found</div>
+                    <></>
                   )
                 }
                 </div>
             </>
           }</>:<>
-          {loadingForDefault?(<div>Loaidng Default Characters</div>):<>
+          {loadingForDefault?(<>
+            <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-16'>
+                  <div className='relative flex justify-center items-center w-fit  mx-auto'>
+                    <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
+                  </div>
+                  <div className='relative max-sm:hidden flex justify-center items-center w-fit  mx-auto'>
+                    <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
+                  </div>
+                  <div className='relative max-lg:hidden flex justify-center items-center w-fit  mx-auto'>
+                    <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
+                  </div>
+              </div>
+          </>):<>
               <div className='flex flex-col'>
                 <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-16'>
                   {
@@ -126,7 +227,19 @@ const Characters = () => {
                   }
                 </div>
 
-                {loadingForMoreCh&&(<div>Loading More Data</div>)}
+                {loadingForMoreCh&&(<>
+                  <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-x-10  mb-10 -mt-5'>
+                  <div className='relative flex justify-center items-center w-fit  mx-auto'>
+                    <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
+                  </div>
+                  <div className='relative max-sm:hidden flex justify-center items-center w-fit  mx-auto'>
+                    <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
+                  </div>
+                  <div className='relative max-lg:hidden flex justify-center items-center w-fit  mx-auto'>
+                    <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
+                  </div>
+              </div>
+                </>)}
 
                 {!clickedShowMore && (!fetchedMore || moreDefaultCharacters.length <= 0) ? (
               <div

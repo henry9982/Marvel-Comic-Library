@@ -49,6 +49,13 @@
 .card{
 }
 .innderCard{}
+
+/* for fav card */
+.favCard:hover .reflection{
+  transform: rotate(45deg) translate(150%, -150%);
+  transition:  3s ease-in-out;
+  transition-delay: 0.5s;
+}
 .reflection{
     position: absolute;
     bottom: 0;
@@ -187,4 +194,10 @@
   .guideTextFromForm {
     bottom: -40px;
   }
+}
+
+
+/* icon animation */
+.icon-container:hover .child{
+  background: #000;
 }

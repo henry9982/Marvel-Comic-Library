@@ -8,7 +8,7 @@ const ApiLimitError = () => {
         <div className='flex justify-center w-11/12 sm:w-4/5 lg:w-2/4 md:w-3/4 gap-5 max-[500px]:flex-col max-[500px]:items-center'>
             <div className='relative'>
 
-                <GiThorHammer className='text-[110px] absolute hummer text-gray-600 -top-4 left-6 z-10 rotate-[135deg]'/>
+                <GiThorHammer className='text-[110px] hammer hover:-translate-y-5 transition duration-1000 absolute hummer text-gray-600 -top-4 left-6 z-10 rotate-[135deg]'/>
                 <GiLetterBomb className='text-[150px] paper -z-30 text-red-600'/>
             </div>
             <div className='max-[500px]:-mt-8'>

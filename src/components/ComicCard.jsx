@@ -10,7 +10,7 @@ import { auth, db } from '../config/firebase-config';
 
 const ComicCard = ({comic}) => {
   const detailUrl = comic.urls.find(element=>element['type']==="detail").url
-  const {openDialog} = useContext(StateContext)
+  const {c} = useContext(StateContext)
   const userID = auth.currentUser?.uid;
 
   const [isFavorite, setIsFavorite] = useState(null);
@@ -61,6 +61,7 @@ const ComicCard = ({comic}) => {
           },
           title: comic.title,
         description: comic.description,
+        detailUrl: comic.urls,
         createdAt: serverTimestamp()
         })
       }
@@ -75,6 +76,7 @@ const ComicCard = ({comic}) => {
         },
         title: comic.title,
       description: comic.description,
+      detailUrl: comic.urls,
       createdAt: serverTimestamp()
       })
     }

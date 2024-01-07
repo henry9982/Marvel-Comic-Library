@@ -8,11 +8,15 @@ import { IoPersonOutline } from "react-icons/io5";
 
 import { auth } from '../config/firebase-config';
 import { StateContext } from '../context/StateContext'
+import { Link, useNavigate } from 'react-router-dom'
+import { signOut } from 'firebase/auth'
+import { GoPerson } from "react-icons/go";
 
 const SideBar = () => {
-    const {isSidebarVisible,toggleSidebar} = useContext(StateContext)
+    const {isSidebarVisible,toggleSidebar,openDialog} = useContext(StateContext)
     const [userName,setUserName] = useState()
     const [userImg,setUserImage] = useState()
+    const navigate = useNavigate()
     useEffect(()=>{
         console.log(auth?.currentUser);
         if (auth?.currentUser?.displayName) {
@@ -23,10 +27,40 @@ const SideBar = () => {
             console.log(firstName);
         }
     },[])
+    const signUserOut = async()=>{
+        try {
+            await signOut(auth)
+            navigate('/signIn')
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    const clickToFavCh = ()=>{
+        if (!userName) {
+            openDialog()
+            return
+        }
+        navigate('/home/favCharacters')
+    }
+    const clickToReadLaterCm = ()=>{
+        if (!userName) {
+            openDialog()
+            return
+        }
+        navigate('/home/readLaterComics')
+    }
   return (
     <div className={`bg-gray-400 z-50  ${!isSidebarVisible?'sideBar':'sideBarShow'}  fixed top-0 bottom-0 right-0`}>
         <CiCircleRemove className='absolute top-3 right-3 text-white text-3xl cursor-pointer' onClick={toggleSidebar}/>
         <div className=' flex flex-col items-center my-24 gap-5  justify-center'>
+            <div className='-mt-8 '>
+                {userName&&<div className='border-2 border-white rounded-full'>
+                    <img src={userImg} className='w-[60px] h-[60px] rounded-full' alt="" />                
+                </div>}
+                {!userName&&<div className='border-2 bg-gray-500 rounded-full w-[60px] h-[60px] flex justify-center items-center'>
+                    <GoPerson className='text-4xl text-white'/>
+                </div>}
+            </div>
             <div className='flex w-fit h-fit items-center justify-center justify-self-stretch gap-1  px-5'>
                 <div className='bg-white p-1 rounded-xl'>
                     <SiMarvelapp className='' />
@@ -36,12 +70,12 @@ const SideBar = () => {
                 </div>
             </div>
             <div className='w-fit gap-5 h-fit flex justify-around items-center'>
-                <div title='Favorite' className=' w-fit  shield-first flex justify-center items-center p-[2px] pr-[2px] rounded-full'>
+                <div onClick={clickToFavCh}  title='Favorite' className=' w-fit cursor-pointer shield-first flex justify-center items-center p-[2px] pr-[2px] rounded-full'>
                     <div className='text-2xl bg-white rounded-full'>
                         <MdStars className=' shield-sec'/>
                     </div>
                 </div>
-                <div className='text-2xl mr-3 relative'>
+                <div onClick={clickToReadLaterCm}  className='text-2xl mr-3 cursor-pointer relative'>
                     <GiClockwork className='text-3xl text-green-400' title='Read later'/>
                 </div>
             </div>
@@ -56,7 +90,7 @@ const SideBar = () => {
                 </div>
             </div>
 
-            {userName?<div className='w-fit'>
+            {userName?<div className='w-fit cursor-pointer hover:scale-95 transition' onClick={signUserOut}>
                 <div className='flex bg-white items-center gap-2 px-1 py-1 mx-2 rounded-full'>
                     <div>
                         <CiLogout className='text-gray-500 text-xl '/>
@@ -64,7 +98,7 @@ const SideBar = () => {
                     <div className='font-poopins text-sm text-gray-400'>Logout</div>
                     <img src={userImg} alt="" className='w-7 h-7 rounded-full' />
                 </div>
-            </div>:<div className='w-fit mx-auto'>
+            </div>:<Link to={'/signIn'} className='w-fit cursor-pointer mx-auto hover:scale-95 transition'>
                 <div className='flex bg-white items-center gap-2 px-1 py-1  rounded-full'>
                     <div>
                         <CiLogin className='text-gray-500 text-xl '/>
@@ -74,7 +108,7 @@ const SideBar = () => {
                         <IoPersonOutline/>
                     </div>
                 </div>
-            </div>}
+            </Link>}
         </div>
 
     </div>

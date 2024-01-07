@@ -141,7 +141,6 @@ const StateContextProvider = ({children}) => {
     try {
       const response = await axios.get(url)
       const comicData = response.data.data.results[0]
-      console.log(comicData);
       dispatch({type:'SET_API_LIMIT_REACHED',payload:false})
       return comicData
     } catch (error) {
@@ -179,7 +178,6 @@ const StateContextProvider = ({children}) => {
       const response = await axios.get(urlForComics)
       const comicData = response.data.data.results
       dispatch({type:'SET_API_LIMIT_REACHED',payload:false})
-      console.log(comicData);
       return comicData
     } catch (error) {
       console.error(error.response.status);
@@ -195,7 +193,6 @@ const StateContextProvider = ({children}) => {
     try {
       const response = await axios.get(url)
       const comicData = response.data.data.results
-      console.log(comicData);
       return comicData
     } catch (error) {
       console.error(error.response.status);
@@ -233,7 +230,6 @@ const StateContextProvider = ({children}) => {
       if (newComicArray[0]===null) {
         newComicArray=[]
       }
-      console.log(newComicArray);
       dispatch({type:'SET_DEFAULT_COMICS',payload:newComicArray});
       dispatch({type:'SET_LOADING_FOR_DEFAULT_COMIC',payload:false})
     }
@@ -264,19 +260,16 @@ const StateContextProvider = ({children}) => {
       for await(const id of comicTitles.mostPopularComicsId){
         const data = await getComics(id)
         comicArray.push(data)
-        console.log(data);
       }
       if (comicArray[0]===null) {
         comicArray=[]
       }
-      console.log(comicArray);
       dispatch({type:'SET_POPULAR_COMICS',payload:comicArray});
       dispatch({type:'SET_LOADING',payload:false})
     }
 
     const showMoreDefaultFetching = async()=>{
       if (state.moreDefaultCharacters.length>0) {
-        console.log('have already fetched more characters');
         return 
       }else{
       dispatch({type:'SET_LOADING_FOR_MORE_CH',payload:true});
@@ -297,7 +290,6 @@ const StateContextProvider = ({children}) => {
     // for comic page
     const showMoreDefaultCmFetching = async()=>{
       if (state.moreDefaultComics.length>0) {
-        console.log('have already fetched more characters');
         return 
       }else{
       dispatch({type:'SET_LOADING_FOR_MORE_CM',payload:true});

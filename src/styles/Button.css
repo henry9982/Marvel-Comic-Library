@@ -1,9 +1,9 @@
 .button-49,
 .button-49:after {
-    width: 220px;
-    height: 46px;
+  width: 120px;
+  height: 30px;
     line-height: 8px;
-  font-size: 15px;
+  font-size: 12px;
   font-family: 'Bebas Neue', sans-serif;
   background: linear-gradient(45deg, transparent 5%, #FF013C 5%);
   border: 0;
@@ -92,8 +92,97 @@
 @media (min-width: 768px) {
   .button-49,
   .button-49:after {
-    width: 220px;
-    height: 46px;
+    width: 120px;
+    height: 30px;
     line-height: 8px;
+  }
+}
+
+
+/* for favorite button */
+.favorite-btn{
+  position: relative;
+  overflow: hidden;
+  transition: all 0.8s ease-in-out;
+}
+.favorite-btn:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%; /* Adjust these values to fit your design */
+  left: 50%; /* Adjust these values to fit your design */
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: #000;
+  transition: width 0.8s ease-in-out, height 0.8s ease-in-out;
+  z-index: -1; /* Ensure the shape stays behind the text */
+}
+
+.favorite-btn:hover:after {
+  width: 200px; /* Adjust the size to cover the text */
+  height: 200px; /* Adjust the size to cover the text */
+}
+
+.favorite-btn:hover{
+  color: white;
+}
+/* .favCard-des::-webkit-scrollbar {
+  display: none;
+} */
+.favCard-des::-webkit-scrollbar {
+  width: 3px; /* Width of the scrollbar */
+}
+
+.favCard-des::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the scrollbar track */
+  border-radius: 20px;
+}
+
+.favCard-des::-webkit-scrollbar-thumb {
+  background-color: #ffffff; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners of the thumb */
+  border: none;
+}
+.favCard-des{
+  white-space: inherit;
+}
+
+/* read later comic card */
+/* .cm-title{
+  white-space: nowrap;
+} */
+
+.cm-title-scroll::-webkit-scrollbar {
+  width: 1px; /* width of the scrollbar */
+  height: 3px;
+}
+
+/* Track */
+.cm-title-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1; /* color of the track */
+  border-radius: 20px;
+
+}
+
+/* Handle */
+.cm-title-scroll::-webkit-scrollbar-thumb {
+  background: #fff; /* color of the handle */
+  border-radius: 20px;
+
+}
+
+/* Handle on hover */
+.cm-title-scroll::-webkit-scrollbar-thumb:hover {
+  background: #fff; /* color of the handle on hover */
+  border-radius: 20px;
+
+}
+
+@media screen and (max-width:450px) {
+  .button-49{
+    width: 110px;
+    height: 25px;
   }
 }
