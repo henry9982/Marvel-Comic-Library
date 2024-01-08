@@ -21,6 +21,7 @@ const initialState = {
   loadingForMoreCm:false,
   loadingForSearchCh:false,
   loadingForSearchCm:false,
+  loadingForFetchCmsByChId:false,
   fetchedMore:false,
   fetchedMoreCm:false,
   apiLimitReached:false,
@@ -48,6 +49,8 @@ const reducer = (state,action)=>{
       return {...state,loadingForSearchCh:action.payload};  
     case 'SET_LOADING_FOR_SEARCH_CM':
       return {...state,loadingForSearchCm:action.payload};
+    case 'SER_LOADING_FOR_FETCH_CMS_BY_CH_ID':
+      return {...state,loadingForFetchCmsByChId:action.payload};
     case 'SET_MORE_CHARACTERs':
       return {...state,moreDefaultCharacters:action.payload};
     case 'SET_MORE_COMICS':
@@ -81,7 +84,7 @@ const reducer = (state,action)=>{
 
 const characterNames = {
   group1:[
-      "hulk",'Ben Reilly', 'Doctor Doom','captain america','iceman','fabian cortez','zaladane','valeria richards','iron man','Scarlet Witch','doctor strange','storm','namor','havok','Wolverine','Nick Fury'
+      "hulk",'Ben Reilly', 'Doctor Doom','captain america','iceman','fabian cortez','valeria richards','iron man','Scarlet Witch','doctor strange','storm','namor','havok','Wolverine','Nick Fury'
   ]
   ,
   group1Copy:[
@@ -326,10 +329,10 @@ const StateContextProvider = ({children}) => {
     // for fetching comics by character id
     const fetchComicsByCharcaterId = async (id)=>{
       dispatch({type:'SET_IS_USING_FETCH_CMS_BY_CH',payload:true})
-      dispatch({type:'SET_LOADING',payload:true});
+      dispatch({type:'SER_LOADING_FOR_FETCH_CMS_BY_CH_ID',payload:true});
       const data = await getComicsByCharacter(id)
       dispatch({type:'SET_COMICS_BY_CHARACTER_ID',payload:data})
-      dispatch({type:'SET_LOADING',payload:false});
+      dispatch({type:'SER_LOADING_FOR_FETCH_CMS_BY_CH_ID',payload:false});
     }
 
     const setFasleToShowDefaultComics = ()=>{

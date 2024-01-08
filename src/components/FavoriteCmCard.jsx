@@ -1,6 +1,7 @@
 import React from 'react'
 import '../styles/Button.css'
 import '../styles/Reflection.css'
+import '../styles/ScroolBarCustomize.css'
 import { TfiTrash } from "react-icons/tfi";
 import { AiOutlineUserDelete } from "react-icons/ai";
 import { deleteDoc, doc } from 'firebase/firestore';
@@ -13,7 +14,6 @@ import { Link } from 'react-router-dom';
 const FavoriteCmCard = ({data}) => {
   const {detailUrl,title,image,id,firestoreItemId,description} = data
   const urlLink = detailUrl.find(element=>element['type']==="detail").url
-  console.log(firestoreItemId);
 
   const deleteCm = async (id) => {
     try {
@@ -29,7 +29,7 @@ const FavoriteCmCard = ({data}) => {
           <img src={`${image.path}.${image.extension}`} className='w-[150px] max-md:w-[160px] max-md:h-[160px] max-sm:w-[145px] max-sm:h-[145px] max-[450px]:w-[135px] max-[450px]:h-[140px] object-cover max-md:-mt-12 max-[450px]:-mt-8 shadow-md shadow-[#AAD7D9] h-[150px] md:-ml-5 rounded-2xl  max-w-none' alt="" />
         </div>
         <div className='flex font-poopins flex-col justify-center  max-md:-translate-y-3 '>
-            <div className=' md:-mt-3 overflow-y-auto w-[160px] cm-title-scroll '>
+            <div className=' md:-mt-3 overflow-y-auto w-[160px] cm-title-scroll max-md:w-full '>
                 <h1 className=' font-medium cm-title whitespace-nowrap '>{title}</h1>
             </div>
             <h5 className='text-xs text-gray-400'>Description</h5>

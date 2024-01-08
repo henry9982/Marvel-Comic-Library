@@ -21,14 +21,13 @@ const Home = () => {
   },[])
   return (
     <div>
-      <dialog id="d" ref={dialogRef} className='bg-white right-0 rounded-md my-auto mx-auto -translate-y-6 p-3 shadow-md'>
+      <dialog id="d" ref={dialogRef} className='bg-white right-0 rounded-md my-auto mx-auto -translate-y-6 p-3 shadow-md w-[530px] max-sm:5/6'>
         <div className='mx-auto w-fit bg-red-500 rounded-full p-2 text-white text-6xl'>
           <LuMailWarning/>
         </div>
         <h1 className='mx-auto w-fit mt-3 text-2xl font-banger text-red-600 tracking-widest'>Oooops!</h1>
         <p className='w-fit mx-auto text-sm font-poopins '>You haven't logged in yet.</p>
-        <h3 className='w-fit mx-auto font-poopins mt-3 text-lg'>You must log in first to be able to use 'Add to Favorites' and 'Read Later' features.</h3>
-        {/* <CiCircleRemove onClick={closeDialog} className='text-2xl cursor-pointer absolute right-2 top-2'/> */}
+        <h3 className='w-fit mx-auto font-poopins mt-3 text-lg max-sm:text-sm'>You must log in first to be able to use 'Add to Favorites' and 'Read Later' features.</h3>
         <div className='flex gap-5 mx-auto w-fit font-poopins my-2 mt-5'>
           <button onClick={closeDialog} className='border px-4 py-[3px] hover:scale-95 transition rounded text-blue-500 border-blue-400'>Not Now</button>
           <button onClick={()=>{

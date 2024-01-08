@@ -1,0 +1,42 @@
+.favCard-des::-webkit-scrollbar {
+    width: 3px; 
+  }
+  
+  .favCard-des::-webkit-scrollbar-track {
+    background-color: #f1f1f1; 
+    border-radius: 20px;
+  }
+  
+  .favCard-des::-webkit-scrollbar-thumb {
+    background-color: #ffffff; 
+    border-radius: 10px;
+    border: none;
+  }
+  .favCard-des{
+    white-space: inherit;
+  }
+  
+  
+  
+  .cm-title-scroll::-webkit-scrollbar {
+    width: 1px;
+    height: 3px;
+  }
+  
+  .cm-title-scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 20px;
+  
+  }
+  
+  .cm-title-scroll::-webkit-scrollbar-thumb {
+    background: #fff; 
+    border-radius: 20px;
+  
+  }
+  
+  .cm-title-scroll::-webkit-scrollbar-thumb:hover {
+    background: #fff; 
+    border-radius: 20px;
+  
+  }

@@ -128,61 +128,32 @@
 .favorite-btn:hover{
   color: white;
 }
-/* .favCard-des::-webkit-scrollbar {
-  display: none;
-} */
-.favCard-des::-webkit-scrollbar {
-  width: 3px; /* Width of the scrollbar */
+
+
+.character-des{
+  height: 225px;
 }
 
-.favCard-des::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Color of the scrollbar track */
-  border-radius: 20px;
+@media screen and (max-width:640px) {
+  .character-des{
+      height: 210px;
+  }
 }
 
-.favCard-des::-webkit-scrollbar-thumb {
-  background-color: #ffffff; /* Color of the scrollbar thumb */
-  border-radius: 10px; /* Rounded corners of the thumb */
-  border: none;
-}
-.favCard-des{
-  white-space: inherit;
-}
-
-/* read later comic card */
-/* .cm-title{
-  white-space: nowrap;
-} */
-
-.cm-title-scroll::-webkit-scrollbar {
-  width: 1px; /* width of the scrollbar */
-  height: 3px;
-}
-
-/* Track */
-.cm-title-scroll::-webkit-scrollbar-track {
-  background: #f1f1f1; /* color of the track */
-  border-radius: 20px;
-
-}
-
-/* Handle */
-.cm-title-scroll::-webkit-scrollbar-thumb {
-  background: #fff; /* color of the handle */
-  border-radius: 20px;
-
-}
-
-/* Handle on hover */
-.cm-title-scroll::-webkit-scrollbar-thumb:hover {
-  background: #fff; /* color of the handle on hover */
-  border-radius: 20px;
-
+@media screen and (max-width:470px) {
+  .character-des{
+      height: 195px;
+  }
 }
 
 @media screen and (max-width:450px) {
   .button-49{
     width: 110px;
     height: 25px;
+  }
+}
+@media screen and (max-width:400px) {
+  .character-des{
+      height: 170px;
   }
 }

@@ -43,9 +43,6 @@ const FavoriteCm = () => {
     }
   }, [userID]);
 
-  useEffect(() => {
-    console.log(readLaterComics);
-  }, [readLaterComics]);
 
   if (user===null) {
     return <Navigate to={'/home'}/>
@@ -83,18 +80,13 @@ const FavoriteCm = () => {
       </div>
       </>}
 
-      {/* <div className='bg-gray-200 rounded-2xl animate-pulse w-[320px] h-[200px] flex items-center'>
-          <div className='w-[150px] max-md:w-[160px] max-md:h-[160px] max-sm:w-[145px] max-sm:h-[145px] max-[450px]:w-[135px] max-[450px]:h-[140px] object-cover max-md:-mt-12 max-[450px]:-mt-8  h-[150px] md:-ml-5 rounded-2xl  max-w-none bg-gray-200 '>
-            
-          </div>
-      </div> */}
     </div>
 
     {readLaterComics&&<>{readLaterComics.length<=0&&<>
       <div className='mb-12 flex justify-center items-center -mt-14 flex-col font-poopins'>
           <h1 className='text-3xl font-banger mb-5 tracking-widest text-red-500'>Ooops!</h1>
-          <p className='text-lg'>It looks like there are no comic books in your Read Later list.</p>
-          <p>Let's find some comics books you might like!</p>
+          <p className='text-lg max-sm:text-base'>It looks like there are no comic books in your Read Later list.</p>
+          <p className='max-sm:text-sm'>Let's find some comics books you might like!</p>
           <div className='flex flex-col mt-5 gap-2 '>
             <small className='text-gray-400'>Click below to explore our collection.</small>
             <button onClick={()=>{

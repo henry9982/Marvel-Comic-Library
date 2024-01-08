@@ -7,10 +7,14 @@ import { FaRegStar ,FaStar  } from "react-icons/fa";
 import useAddFavoriteCh from '../hooks/useAddFavoriteCh';
 import { addDoc, collection, deleteDoc, doc, getDocs, query, serverTimestamp, where } from 'firebase/firestore';
 import { auth, db } from '../config/firebase-config';
+import '../styles/Button.css'
+import '../styles/Reflection.css'
+import '../styles/ScroolBarCustomize.css'
+
 
 const ComicCard = ({comic}) => {
   const detailUrl = comic.urls.find(element=>element['type']==="detail").url
-  const {c} = useContext(StateContext)
+  const {openDialog } = useContext(StateContext)
   const userID = auth.currentUser?.uid;
 
   const [isFavorite, setIsFavorite] = useState(null);
@@ -83,20 +87,20 @@ const ComicCard = ({comic}) => {
   }
 
   return (
-    <div key={comic.id}  className='relative flex justify-center items-center w-fit  mx-auto card hover:scale-110 '>
-                      <div className='bg-blue-400 w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] z-20 innderCard relative transition overflow-hidden border-2 border-black'>
+    <div key={comic.id}  className='relative flex justify-center items-center w-fit  mx-auto card hover:scale-110 translate-x-7 max-md:translate-x-5  max-sm:translate-x-0 max-[320px]:hover:translate-x-6  '>
+                      <div className='bg-gray-400 w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] z-20 innderCard relative transition overflow-hidden border-2 border-black'>
                           <img className='h-full w-full object-cover' src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} alt="" />
                           <div className='reflection'></div>
-                          <div className=' absolute w-fit z-50 top-1 right-1 cursor-pointe rounded-full '>
+                          {isFavorite===null?'':<><div className=' absolute border-2 bg-black border-white  text-white p-1 w-fit z-50 top-1 right-1 cursor-pointe rounded-full text-lg'>
                             {/* {!isFavorite?                              <FaRegBookmark onClick={handleStar} className='text-xl text-white cursor-pointer'/>:<FaBookmark onClick={handleStar} className='text-xl text-yellow-300 cursor-pointer'/>} */}
-                            {isFavorite===null?'':!isFavorite?(<FaRegBookmark onClick={handleStar} className='text-xl text-white cursor-pointer'/>):(<FaBookmark onClick={handleStar} className='text-xl text-yellow-300 cursor-pointer'/>)}
-                          </div>
+                            {!isFavorite?(<FaRegBookmark onClick={handleStar} className='  cursor-pointer'/>):(<FaBookmark onClick={handleStar} className=' text-yellow-300 cursor-pointer'/>)}
+                          </div></>}
                       </div>
                       <div className=' top-0 border-2 border-black border-l-0 flex justify-between flex-col  right-0 bg-[#333333]  w-3/6 h-[98%] max-[400px]:w-[51%] max-[400px]:pl-[2px] characterInfoBox  my-auto bottom-0  absolute'>
                         <div className='my-1 '>
                           <div className='font-banger text-white  tracking-widest font-'>Marvel</div>
-                          <div className='text-white -mt-1 font-poopins text-[13px] whitespace-nowrap overflow-auto characterInfoBoxName'>{comic.title}</div>
-                          <div className='text-[12px] mt-1 tracking-wide h-56 overflow-auto text-white characterInfoBoxDes'>{comic.description?comic.description:'No description about the character'}</div>
+                          <div className='text-white -mt-1 font-poopins text-[13px] max-[470px]:text-[11px] whitespace-nowrap overflow-auto characterInfoBoxName '>{comic.title}</div>
+                          <div className='text-[12px] mt-1 tracking-wide character-des overflow-auto text-neutral-300 characterInfoBoxDes max-[470px]:text-[11px]'>{comic.description?comic.description:'No description about the character'}</div>
                         </div>
                         <a href={detailUrl} target='_blank'  className=' flex justify-between absolute bottom-0 max-sm:-bottom-[1px] max-[400px]:-bottom-[1.10pt] -right-[7px] box-info-btn cursor-pointer w-[115px] max-sm:w-[105px]  max-sm:h-7 max-[470px]:w-[96px] max-[400px]:w-[81px] max-[400px]:h-6 bg-white items-center h-7 overflow-hidden '>
                           <div className='bg-[#EE7214]   h-full flex - justify-center items-center relative'>

@@ -9,6 +9,7 @@ import Characters from './pages/Characters.jsx'
 import Comics from './pages/Comics.jsx'
 import FavoriteCh from './pages/FavoriteCh.jsx'
 import FavoriteCm from './pages/FavoriteCm.jsx'
+import Loader from './components/Loader.jsx'
 
 const App = () => {
   const [isLoggedIn,setIsLoggedIn] = useState(null) 
@@ -16,18 +17,15 @@ const App = () => {
     const unsubscribe = onAuthStateChanged(auth,user=>{
       if (user) {
         setIsLoggedIn(true)
-        console.log('true',user);
       } else {
         setIsLoggedIn(false)
-        console.log('false',user);
       }
     })
     
     return unsubscribe
   },[])
   if (isLoggedIn === null) {
-    // You can render a loading spinner or other content while checking auth state
-    return <div>Loading...</div>;
+    return <Loader/>;
   }
   return (
     <BrowserRouter>

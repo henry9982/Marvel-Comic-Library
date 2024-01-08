@@ -7,6 +7,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import ApiLimitError from '../components/ApiLimitError';
 import { useNavigate } from 'react-router-dom';
 import { MdOutlinePerson4 } from "react-icons/md";
+import { IoIosArrowBack , IoIosArrowForward  } from "react-icons/io";
 
 
 
@@ -16,11 +17,33 @@ const Characters = () => {
   const { defaultCharacters,loadingForMoreCh, loading,loadingForDefault,loadingForSearchCh, moreDefaultCharacters, popularCharacters,fetchedMore,apiLimitReached ,fetchedCharacters,usedSearch} = state;
   const [clickedShowMore, setClickedShowMore] = useState(false);
 
-  useEffect(()=>{
-    console.dir(dialogRef.current);
-  },[dialogRef])
+  const [separatedCharacters,setSeparatedCharacters] = useState([])
+  const [currentArray,setCurrentArray] = useState(0)
 
+  const separateCharacters = () => {
+    const characters = fetchedCharacters || [];
+    const separated = [];
+    let tempArr = [];
 
+    characters.forEach((character, index) => {
+      if ((index > 0 && (index + 1) % 10 === 0) || index === characters.length - 1) {
+        tempArr.push(character);
+        separated.push([...tempArr]);
+        tempArr = [];
+      } else {
+        tempArr.push(character);
+      }
+    });
+
+    setSeparatedCharacters(separated);
+  };
+
+  useEffect(() => {
+    separateCharacters();
+  }, [fetchedCharacters])
+
+  useEffect(() => {
+  }, [separatedCharacters])
 
 
   const navigate = useNavigate()
@@ -42,6 +65,7 @@ const Characters = () => {
     event.preventDefault()
     console.log(searchName.toLowerCase());
     searchFetchingCharacters(searchName.toLowerCase())
+    setCurrentArray(0)
   }
   return (
     <>
@@ -137,7 +161,7 @@ const Characters = () => {
                 </div>)
             })}
             </div>
-            <div className='text-white font-poopins text-xs mt-3 max-md:text-[10px]'>
+            <div className='text-white font-poopins text-xs mt-3 max-md:text-[10px] max-md:px-2'>
                 In the section below, you'll find some default characters. If you don't see what you're looking for, you can search by character name.            
             </div>
           </div>
@@ -152,7 +176,7 @@ const Characters = () => {
 
           {usedSearch?<>{loadingForSearchCh?<></>:<>
             {
-              fetchedCharacters && fetchedCharacters.lenght>0?<></>:<>
+              fetchedCharacters && fetchedCharacters.length>0?<></>:<>
                   <div className='mt-20 w-fit mx-auto flex flex-col items-center font-poopins'>
                         <h1 className='text-4xl font-banger tracking-widest text-red-400'>Whoops!</h1>
                         <div className='text-3xl w-[50px] icon-container h-[50px] hover:scale-95 hover:bg-black hover:text-white transition border-2  relative flex items-center justify-center border-black rounded-full'>
@@ -169,22 +193,22 @@ const Characters = () => {
           
           {usedSearch?<>{
             loadingForSearchCh?(<>
-            <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-16'>
-                  <div className='relative flex justify-center items-center w-fit  mx-auto'>
+              <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-16'>
+                  <div className='relative translate-x-7 max-md:translate-x-5  max-sm:translate-x-0 max-[320px]:hover:translate-x-6  flex justify-center items-center w-fit  mx-auto'>
                     <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
                   </div>
-                  <div className='relative max-sm:hidden flex justify-center items-center w-fit  mx-auto'>
+                  <div className='relative translate-x-7 max-md:translate-x-5  max-sm:translate-x-0 max-[320px]:hover:translate-x-6  max-sm:hidden flex justify-center items-center w-fit  mx-auto'>
                     <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
                   </div>
-                  <div className='relative max-lg:hidden flex justify-center items-center w-fit  mx-auto'>
+                  <div className='relative translate-x-7 max-md:translate-x-5  max-sm:translate-x-0 max-[320px]:hover:translate-x-6  max-lg:hidden flex justify-center items-center w-fit  mx-auto'>
                     <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
                   </div>
               </div>
             </>):<>
                 <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-16'>
                 {
-                  fetchedCharacters && fetchedCharacters.length > 0 ? (
-                    fetchedCharacters.map((character) => {
+                  separatedCharacters && separatedCharacters.length > 0 ? (
+                    separatedCharacters[currentArray].map((character) => {
                       return <CharacterCard key={character.id} character={character}/>; 
                     })
                   ) : (
@@ -192,17 +216,36 @@ const Characters = () => {
                   )
                 }
                 </div>
+                {separatedCharacters.length>1&&<div className='w-fit select-none font-banger  mx-auto mb-5 flex items-center justify-center gap-3'>
+                  <div onClick={()=>{
+                    currentArray!==0&&setCurrentArray(currentArray-1)
+                  }} className={`hover:${currentArray==0?'':'bg-gray-100'} ${currentArray==0&&"text-gray-300"} text-xl border  rounded-md transition p-[6px] cursor-pointer`}>
+                    <IoIosArrowBack className=''/>
+                  </div>
+                  {separatedCharacters.map((_, index) => (
+                    <button onClick={()=>{
+                      setCurrentArray(index)
+                    }} className={`hover:${currentArray===index?'bg-gray-400':'bg-gray-100'} border rounded-md transition p-1 px-3 max-sm:px-2  ${currentArray===index&&'bg-gray-300'}`} key={index} >
+                      {index + 1}
+                    </button>
+                  ))}
+                  <div onClick={()=>{
+                    currentArray!==separatedCharacters.length-1&&setCurrentArray(currentArray+1)
+                  }} className={`hover:${currentArray==4?'':'bg-gray-100'} ${currentArray==separatedCharacters.length-1&&"text-gray-300"} text-xl border  rounded-md transition p-[6px] cursor-pointer`}>
+                    <IoIosArrowForward className=''/>
+                  </div>
+                </div>}
             </>
           }</>:<>
           {loadingForDefault?(<>
             <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-10  my-16'>
-                  <div className='relative flex justify-center items-center w-fit  mx-auto'>
+                  <div className='relative translate-x-7 max-md:translate-x-5  max-sm:translate-x-0 max-[320px]:hover:translate-x-6  flex justify-center items-center w-fit  mx-auto'>
                     <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
                   </div>
-                  <div className='relative max-sm:hidden flex justify-center items-center w-fit  mx-auto'>
+                  <div className='relative translate-x-7 max-md:translate-x-5  max-sm:translate-x-0 max-[320px]:hover:translate-x-6  max-sm:hidden flex justify-center items-center w-fit  mx-auto'>
                     <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
                   </div>
-                  <div className='relative max-lg:hidden flex justify-center items-center w-fit  mx-auto'>
+                  <div className='relative translate-x-7 max-md:translate-x-5  max-sm:translate-x-0 max-[320px]:hover:translate-x-6  max-lg:hidden flex justify-center items-center w-fit  mx-auto'>
                     <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
                   </div>
               </div>
@@ -228,14 +271,14 @@ const Characters = () => {
                 </div>
 
                 {loadingForMoreCh&&(<>
-                  <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-x-10  mb-10 -mt-5'>
-                  <div className='relative flex justify-center items-center w-fit  mx-auto'>
+                  <div className='grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-x-10  mb-10 -mt-16'>
+                  <div className='relative translate-x-7 max-md:translate-x-5  max-sm:translate-x-0 max-[320px]:hover:translate-x-6  flex justify-center items-center w-fit  mx-auto'>
                     <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
                   </div>
-                  <div className='relative max-sm:hidden flex justify-center items-center w-fit  mx-auto'>
+                  <div className='relative translate-x-7 max-md:translate-x-5  max-sm:translate-x-0 max-[320px]:hover:translate-x-6  max-sm:hidden flex justify-center items-center w-fit  mx-auto'>
                     <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
                   </div>
-                  <div className='relative max-lg:hidden flex justify-center items-center w-fit  mx-auto'>
+                  <div className='relative translate-x-7 max-md:translate-x-5  max-sm:translate-x-0 max-[320px]:hover:translate-x-6  max-lg:hidden flex justify-center items-center w-fit  mx-auto'>
                     <div className='w-[220px] h-[320px] max-sm:w-[200px] max-sm:h-[300px] max-[470px]:w-[180px] max-[470px]:h-[280px] max-[400px]:w-[150px] max-[400px]:h-[250px] bg-gray-200 animate-pulse'></div>
                   </div>
               </div>

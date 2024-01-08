@@ -5,6 +5,8 @@ import {GiClockwork} from 'react-icons/gi'
 import {FaUserAstronaut,FaUserNinja} from 'react-icons/fa'
 import { CiLogout ,CiLogin ,CiCircleRemove } from "react-icons/ci";
 import { IoPersonOutline } from "react-icons/io5";
+import { IoIosArrowDropup  } from "react-icons/io";
+
 
 import { auth } from '../config/firebase-config';
 import { StateContext } from '../context/StateContext'
@@ -18,13 +20,11 @@ const SideBar = () => {
     const [userImg,setUserImage] = useState()
     const navigate = useNavigate()
     useEffect(()=>{
-        console.log(auth?.currentUser);
         if (auth?.currentUser?.displayName) {
             let fullName =auth?.currentUser?.displayName;
             let firstName = fullName.split(' ')[0];
             setUserName(firstName)
             setUserImage(auth.currentUser.photoURL)
-            console.log(firstName);
         }
     },[])
     const signUserOut = async()=>{
@@ -49,11 +49,24 @@ const SideBar = () => {
         }
         navigate('/home/readLaterComics')
     }
+
+    const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth' ,
+        });
+      };
   return (
-    <div className={`bg-gray-400 z-50  ${!isSidebarVisible?'sideBar':'sideBarShow'}  fixed top-0 bottom-0 right-0`}>
-        <CiCircleRemove className='absolute top-3 right-3 text-white text-3xl cursor-pointer' onClick={toggleSidebar}/>
+    <div className={`bg-gray-400 z-50 rounded-lg rounded-tl-none rounded-bl-none ${!isSidebarVisible?'sideBar':'sideBarShow'}  fixed top-0 bottom-0 left-0`}>
+        <div title='close side bar' className='absolute top-3 -right-10 cursor-pointer bg-gray-500 rounded-full'>
+            <CiCircleRemove className=' text-white text-3xl cursor-pointer' onClick={toggleSidebar}/>
+        </div>
+        <div title='scroll to top' className='absolute bottom-3 -right-10 cursor-pointer bg-gray-500 rounded-full'>
+            <IoIosArrowDropup  className=' text-white text-3xl cursor-pointer' onClick={scrollToTop}/>
+        </div>
+
         <div className=' flex flex-col items-center my-24 gap-5  justify-center'>
-            <div className='-mt-8 '>
+            <div className='-mt-14 '>
                 {userName&&<div className='border-2 border-white rounded-full'>
                     <img src={userImg} className='w-[60px] h-[60px] rounded-full' alt="" />                
                 </div>}
@@ -61,7 +74,7 @@ const SideBar = () => {
                     <GoPerson className='text-4xl text-white'/>
                 </div>}
             </div>
-            <div className='flex w-fit h-fit items-center justify-center justify-self-stretch gap-1  px-5'>
+            <div className='flex  w-fit h-fit items-center justify-center justify-self-stretch gap-1  px-5'>
                 <div className='bg-white p-1 rounded-xl'>
                     <SiMarvelapp className='' />
                 </div>
@@ -69,14 +82,20 @@ const SideBar = () => {
                     {userName?<div>{userName}</div>:<div>unknown</div>}
                 </div>
             </div>
-            <div className='w-fit gap-5 h-fit flex justify-around items-center'>
-                <div onClick={clickToFavCh}  title='Favorite' className=' w-fit cursor-pointer shield-first flex justify-center items-center p-[2px] pr-[2px] rounded-full'>
-                    <div className='text-2xl bg-white rounded-full'>
-                        <MdStars className=' shield-sec'/>
+            <div className='w-fit text-white gap-5 h-fit flex flex-col justify-start items-center'>
+                <div className='flex gap-1 items-center cursor-pointer hover:text-gray-200 transition'onClick={clickToFavCh}>
+                    <div   title='Favorite' className=' w-fit cursor-pointer shield-first flex justify-center items-center p-[2px] pr-[2px] rounded-full'>
+                        <div className='text-2xl bg-white rounded-full'>
+                            <MdStars className=' shield-sec'/>
+                        </div>
                     </div>
+                    <div className='font-poopins text-sm'>Favorite Characters</div>
                 </div>
-                <div onClick={clickToReadLaterCm}  className='text-2xl mr-3 cursor-pointer relative'>
-                    <GiClockwork className='text-3xl text-green-400' title='Read later'/>
+                <div className='flex gap-1 items-center -ml-2 cursor-pointer hover:text-gray-200 transition'onClick={clickToReadLaterCm}>
+                    <div   className='text-2xl cursor-pointer relative'>
+                        <GiClockwork className='text-3xl text-green-400' title='Read later'/>
+                    </div>
+                    <div className='font-poopins text-sm'>Read Later Comics</div>
                 </div>
             </div>
             <div>

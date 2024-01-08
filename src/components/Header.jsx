@@ -20,12 +20,10 @@ const Header = () => {
     
     const [userName,setUserName] = useState()
     useEffect(()=>{
-        console.log(auth?.currentUser?.displayName);
         if (auth?.currentUser?.displayName) {
             let fullName =auth?.currentUser?.displayName;
             let firstName = fullName.split(' ')[0];
             setUserName(firstName)
-            console.log(firstName);
         }
     },[])
     const signUserOut = async()=>{
@@ -63,7 +61,7 @@ const Header = () => {
                         {userName?<div>{userName}</div>:<div>unknown</div>}
                     </div>
                 </div>
-                <div className='sm:h-16 h-14 w-28 overflow-hidden bg-white flex justify-center items-center sm:-mr-20'>
+                <div className='sm:h-16 h-14 w-28 overflow-hidden bg-white flex justify-center items-center sm:-mr-14'>
                     <img className='w-32 h-32 max-w-none' src="/src/pics/image/MR-oladinocom-svg170723t001-1772023133411-1-removebg-preview.png" alt="" />
                 </div>
                 <div className='sm:flex gap-2 border hidden  h-full justify-center items-center pl-5 border-y-0 border-[#3e3e3e]'>
@@ -96,9 +94,7 @@ const Header = () => {
                 <Link  to={'/home/comics'} className='hover:text-zinc-400 transition'>
                     comics
                 </Link>
-                {/* <Link onClick={setFasleToShowDefaultComics} to={'/home/comics'} className='hover:text-zinc-400 transition'>
-                    comics
-                </Link> */}
+
             </div>
         </div>
         <div className='bg-[#1f1f1f] w-fit cursor-pointer fixed p-[5px] sm:hidden z-40 rounded-full right-3 top-[10px]' onClick={toggleSidebar}>

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import '../styles/Button.css'
 import '../styles/Reflection.css'
+import '../styles/ScroolBarCustomize.css'
 import { TfiTrash } from "react-icons/tfi";
 import { AiOutlineUserDelete } from "react-icons/ai";
 import { deleteDoc, doc } from 'firebase/firestore';
@@ -13,7 +14,6 @@ const FavoriteChCard = ({data}) => {
   const {fetchComicsByCharcaterId} =  useContext(StateContext)
   const navigate = useNavigate()
   const {name,image,id,firestoreItemId,description} = data
-  console.log(firestoreItemId);
 
   const deleteFavCh = async (id) => {
     try {

@@ -9,7 +9,6 @@ const FavoriteCh = () => {
    const [favChrs, setFavChrs] = useState();
   const [userID, setUserID] = useState(null);
   const user = auth.currentUser
-  console.log(user);
 
   useEffect(() => {
     const user = auth.currentUser;
@@ -42,10 +41,6 @@ const FavoriteCh = () => {
       };
     }
   }, [userID]);
-
-  useEffect(() => {
-    console.log(favChrs);
-  }, [favChrs]);
 
   if (user!==null) {
     return (
@@ -81,10 +76,10 @@ const FavoriteCh = () => {
       </div>
 
       {favChrs&&<>{favChrs.length<=0&&<>
-        <div className='mb-12 flex justify-center items-center -mt-14 flex-col font-poopins'>
+        <div className='mb-12 flex p-1 justify-center items-center -mt-14 flex-col font-poopins'>
           <h1 className='text-3xl font-banger mb-5 tracking-widest text-red-500'>Uh-oh!</h1>
-          <p className='text-lg'>Looks like you haven't added any favorite characters yet.</p>
-          <p>Let's start building your list of beloved heroes and villains!</p>
+          <p className='text-lg max-sm:text-base'>Looks like you haven't added any favorite characters yet.</p>
+          <p className='max-sm:text-sm'>Let's start building your list of beloved heroes and villains!</p>
           <div className='flex flex-col mt-5 gap-2 '>
             <small className='text-gray-400'>Click below to explore our collection.</small>
             <button onClick={()=>{
