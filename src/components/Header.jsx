@@ -62,7 +62,7 @@ const Header = () => {
                     </div>
                 </div>
                 <div className='sm:h-16 h-14 w-28 overflow-hidden bg-white flex justify-center items-center sm:-mr-12'>
-                    <img className='w-32 h-32 max-w-none' src="/src/pics/image/MR-oladinocom-svg170723t001-1772023133411-1-removebg-preview.png" alt="" />
+                    <img className='w-32 h-32 max-w-none' src="dist/pics/image/MR-oladinocom-svg170723t001-1772023133411-1-removebg-preview.png" alt="" />
                 </div>
                 <div className='sm:flex gap-2 border hidden  h-full justify-center items-center pl-5 border-y-0 border-[#3e3e3e]'>
                     <div onClick={clickToFavCh}  title='Favorite' className='cursor-pointer  shield-first flex justify-center items-center p-[2px] pr-[2px] rounded-full'>
