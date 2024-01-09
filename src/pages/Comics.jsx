@@ -182,6 +182,13 @@ const Comics = () => {
           </>}
 
               </div>
+              {isUsingFetchCmsByCh?<>{loadingForFetchCmsByChId?<></>:<>{separatedComicsChId&&separatedComicsChId.length>0?<></>:<>
+                  <div className='w-fit mx-auto -mt-24 mb-10 font-poopins max-sm:w-5/6'>
+                      <h1 className='text-3xl text-red-400'>Ooops!</h1>
+                      <p className='text-gray-500 max-sm:text-sm'>Sorry, no comic books found for this character.</p>
+                      <p className='text-gray-500 max-sm:text-sm'>You can view other default comics by clicking the button above!</p>
+                  </div>
+              </>}</>}</>:<></>}
 
               {separatedComicsChId.length>1&&<div className='w-fit select-none font-banger  mx-auto mb-5 flex items-center justify-center gap-3'>
                   <div onClick={()=>{

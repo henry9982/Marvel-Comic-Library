@@ -20,20 +20,20 @@ const SignIn = () => {
   return (
     <div className='whole-container h-screen w-screen flex justify-center items-center'>
         <div className='bg-container -z-20'>
-          <img className="delayed max-h-max ani h-[350px] max-xl:h-[320px] max-w-none" src="/src/pics/clean.jpg" alt=""/>
-          <img  className="ani h-[350px] max-xl:h-[320px] max-w-none" src="/src/pics/detail (1).jpg" alt=""/>
-          <img className="delayed ani h-[350px] max-xl:h-[320px] max-w-none" src="/src/pics/detail (10).jpg" alt=""/>
-          <img  className="ani h-[350px] max-xl:h-[320px] max-w-none" src="/src/pics/detail (11).jpg" alt=""/>
-          <img className="delayed ani h-[350px] max-xl:h-[320px] max-w-none" src="/src/pics/detail (12).jpg" alt=""/>
-          <img  className="ani h-[350px] max-xl:h-[320px] max-w-none" src="/src/pics/detail (13).jpg" alt=""/>
-          <img className="delayed ani h-[350px] max-xl:h-[320px] max-w-none" src="/src/pics/detail (14).jpg" alt=""/>
-          <img className="ani h-[350px] max-xl:h-[320px] max-w-none"  src="/src/pics/detail (15).jpg" alt=""/>
-          <img className="delayed ani h-[350px] max-xl:h-[320px] max-w-none" src="/src/pics/detail (16).jpg" alt=""/>
-          <img  className="ani h-[350px] max-xl:h-[320px] max-w-none" src="/src/pics/detail (17).jpg" alt=""/>
-          <img className="delayed ani h-[350px] max-xl:h-[320px] max-w-none" src="/src/pics/detail (2).jpg" alt=""/>
-          <img  className="ani h-[350px] max-xl:h-[320px] max-w-none" src="/src/pics/detail (3).jpg" alt=""/>
-          <img className="delayed ani h-[350px] max-xl:h-[320px] max-w-none" src="/src/pics/detail (4).jpg" alt=""/>
-          <img className="ani h-[350px] max-xl:h-[320px] max-w-none"  src="/src/pics/detail (5).jpg" alt=""/>
+          <img className="delayed ani h-[350px] max-2xl:h-[315px] max-w-none" src="/src/pics/clean.jpg" alt=""/>
+          <img  className="ani h-[350px] max-2xl:h-[315px] max-w-none" src="/src/pics/detail (1).jpg" alt=""/>
+          <img className="delayed ani h-[350px] max-2xl:h-[315px] max-w-none" src="/src/pics/detail (10).jpg" alt=""/>
+          <img  className="ani h-[350px] max-2xl:h-[315px] max-w-none" src="/src/pics/detail (11).jpg" alt=""/>
+          <img className="delayed ani h-[350px] max-2xl:h-[315px] max-w-none" src="/src/pics/detail (12).jpg" alt=""/>
+          <img  className="ani h-[350px] max-2xl:h-[315px] max-w-none" src="/src/pics/detail (13).jpg" alt=""/>
+          <img className="delayed ani h-[350px] max-2xl:h-[315px] max-w-none" src="/src/pics/detail (14).jpg" alt=""/>
+          <img className="ani h-[350px] max-2xl:h-[315px] max-w-none"  src="/src/pics/detail (15).jpg" alt=""/>
+          <img className="delayed ani h-[350px] max-2xl:h-[315px] max-w-none" src="/src/pics/detail (16).jpg" alt=""/>
+          <img  className="ani h-[350px] max-2xl:h-[315px] max-w-none" src="/src/pics/detail (17).jpg" alt=""/>
+          <img className="delayed ani h-[350px] max-2xl:h-[315px] max-w-none" src="/src/pics/detail (2).jpg" alt=""/>
+          <img  className="ani h-[350px] max-2xl:h-[315px] max-w-none" src="/src/pics/detail (3).jpg" alt=""/>
+          <img className="delayed ani h-[350px] max-2xl:h-[315px] max-w-none" src="/src/pics/detail (4).jpg" alt=""/>
+          <img className="ani h-[350px] max-2xl:h-[315px] max-w-none"  src="/src/pics/detail (5).jpg" alt=""/>
           <img src="../" alt="" />
 
           <div className='filter'></div>

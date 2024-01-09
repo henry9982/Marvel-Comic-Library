@@ -85,8 +85,8 @@ const FavoriteCm = () => {
     {readLaterComics&&<>{readLaterComics.length<=0&&<>
       <div className='mb-12 flex justify-center items-center -mt-14 flex-col font-poopins'>
           <h1 className='text-3xl font-banger mb-5 tracking-widest text-red-500'>Ooops!</h1>
-          <p className='text-lg max-sm:text-base'>It looks like there are no comic books in your Read Later list.</p>
-          <p className='max-sm:text-sm'>Let's find some comics books you might like!</p>
+          <p className='text-lg max-sm:text-sm mx-3'>It looks like there are no comic books in your Read Later list.</p>
+          <p className='max-sm:text-xs mx-3'>Let's find some comics books you might like!</p>
           <div className='flex flex-col mt-5 gap-2 '>
             <small className='text-gray-400'>Click below to explore our collection.</small>
             <button onClick={()=>{

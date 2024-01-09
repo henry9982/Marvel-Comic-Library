@@ -46,10 +46,6 @@
     transition: 0.2s linear;
 }
 
-.card{
-}
-.innderCard{}
-
 /* for fav card */
 .favCard:hover .reflection{
   transform: rotate(45deg) translate(150%, -150%);
@@ -78,32 +74,23 @@
 .card:hover img{
     filter: grayscale(0);
 }
-/* .card:hover .characterInfoBox{
-    transform: translateX(10%);
-} */
 
-/* .characterInfoBox{
-    background-image: url(../pics/image/paper.jpg);
-} */
 .characterInfoBoxDes::-webkit-scrollbar {
     display: none;
   }
-  /* .characterInfoBoxName::-webkit-scrollbar {
-    display: none;
-  } */
-
+  
   .characterInfoBoxName::-webkit-scrollbar {
     height: 1px;
   }
   
   .characterInfoBoxName::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Color of the scrollbar track */
+    background-color: #f1f1f1; 
     border-radius: 20px;
   }
   
   .characterInfoBoxName::-webkit-scrollbar-thumb {
-    background-color: #ffffff; /* Color of the scrollbar thumb */
-    border-radius: 10px; /* Rounded corners of the thumb */
+    background-color: #ffffff; 
+    border-radius: 10px; 
     border: none;
   }
 
@@ -144,12 +131,12 @@
   }
   .message {
     display: none;
-    transition: display 0s ease-in-out 1s; /* Initial delay set to 1 second */
+    transition: display 0s ease-in-out 1s;
   }
   
   .person-controler:hover .message {
     display: block;
-    transition: display 0s ease-in-out; /* Resetting the transition property */
+    transition: display 0s ease-in-out; 
   }
 
 

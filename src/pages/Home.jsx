@@ -26,10 +26,10 @@ const Home = () => {
           <LuMailWarning/>
         </div>
         <h1 className='mx-auto w-fit mt-3 text-2xl font-banger text-red-600 tracking-widest'>Oooops!</h1>
-        <p className='w-fit mx-auto text-sm font-poopins '>You haven't logged in yet.</p>
-        <h3 className='w-fit mx-auto font-poopins mt-3 text-lg max-sm:text-sm'>You must log in first to be able to use 'Add to Favorites' and 'Read Later' features.</h3>
+        <p className='w-fit mx-auto text-sm font-poopins text-gray-500'>You haven't logged in yet.</p>
+        <h3 className='w-fit text-gray-600 mx-auto font-poopins mt-3 text-lg max-sm:text-sm'>You must log in first to be able to use 'Add to Favorites' and 'Read Later' features.</h3>
         <div className='flex gap-5 mx-auto w-fit font-poopins my-2 mt-5'>
-          <button onClick={closeDialog} className='border px-4 py-[3px] hover:scale-95 transition rounded text-blue-500 border-blue-400'>Not Now</button>
+          <button onClick={closeDialog} className='border outline-none px-4 py-[3px] hover:scale-95 transition rounded text-blue-500 border-blue-400'>Not Now</button>
           <button onClick={()=>{
             navigate('/signIn')
           }} className='border px-4 py-[3px] hover:scale-95 transition rounded border-none text-white bg-blue-400'>Login Now</button>

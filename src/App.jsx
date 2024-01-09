@@ -10,6 +10,7 @@ import Comics from './pages/Comics.jsx'
 import FavoriteCh from './pages/FavoriteCh.jsx'
 import FavoriteCm from './pages/FavoriteCm.jsx'
 import Loader from './components/Loader.jsx'
+import Error from './pages/Error.jsx'
 
 const App = () => {
   const [isLoggedIn,setIsLoggedIn] = useState(null) 
@@ -30,17 +31,15 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path='/'
-            element={isLoggedIn?<Navigate to={`/home`}/>:<Navigate to={'/signIn'}/>}
-        />
+        <Route path='/'element={isLoggedIn?<Navigate to={`/home`}/>:<Navigate to={'/signIn'}/>}/>
         <Route path='/signIn' element={<SignIn/>}/>
         <Route path='/home' element={<Home/>}>
            <Route index element={<Characters/>}/>
            <Route path='/home/comics' element={<Comics/>}/>
            <Route path='/home/favCharacters' element={<FavoriteCh/>}/>
            <Route path='/home/readLaterComics' element={<FavoriteCm/>}/>
-
         </Route>
+        <Route path='*' element={<Error/>}/>
       </Routes>
     </BrowserRouter>
   )

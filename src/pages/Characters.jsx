@@ -63,7 +63,6 @@ const Characters = () => {
 
   const handleSubmit = (event)=>{
     event.preventDefault()
-    console.log(searchName.toLowerCase());
     searchFetchingCharacters(searchName.toLowerCase())
     setCurrentArray(0)
   }
@@ -71,58 +70,58 @@ const Characters = () => {
     <>
       {loading ? (
         <>
-<div className='flex flex-col justify-center items-center py-5 gap-5 bg-[rgb(22,22,22)]'>
-            <div className='flex text-white animate-pulse  -translate-y-2 bg-gray-200 w-[370px] h-[18px]'></div>
+          <div className='flex flex-col justify-center items-center py-5 gap-5 bg-[rgb(22,22,22)]'>
+              <div className='flex text-white animate-pulse  -translate-y-2 bg-gray-200 w-[370px] h-[18px]'></div>
 
-            <div className='text-white font-banger tracking-widest -translate-y-3 w-[280px] h-[20px] bg-gray-200 animate-pulse'></div>
+              <div className='text-white font-banger tracking-widest -translate-y-3 w-[280px] h-[20px] bg-gray-200 animate-pulse'></div>
 
-            <div className='flex flex-wrap justify-center items-center gap-5'>
+              <div className='flex flex-wrap justify-center items-center gap-5'>
 
-                <div className='flex flex-col gap-3 '>
-                    <div className='h-[250px] w-[180px] bg-gray-200 animate-pulse max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px]  headCard overflow-hidden relative transition duration-300  '>
+                  <div className='flex flex-col gap-3 '>
+                      <div className='h-[250px] w-[180px] bg-gray-200 animate-pulse max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px]  headCard overflow-hidden relative transition duration-300  '>
 
-                    </div>
-                    <div className='h-[20px] w-[120px] bg-gray-200 animate-pulse'>
+                      </div>
+                      <div className='h-[20px] w-[120px] bg-gray-200 animate-pulse'>
 
-                    </div>
-                </div>
+                      </div>
+                  </div>
 
-                <div className='flex flex-col gap-3 '>
-                    <div className='h-[250px] w-[180px] bg-gray-200 animate-pulse max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px]  headCard overflow-hidden relative transition duration-300  '>
+                  <div className='flex flex-col gap-3 '>
+                      <div className='h-[250px] w-[180px] bg-gray-200 animate-pulse max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px]  headCard overflow-hidden relative transition duration-300  '>
 
-                    </div>
-                    <div className='h-[20px] w-[120px] bg-gray-200 animate-pulse'>
+                      </div>
+                      <div className='h-[20px] w-[120px] bg-gray-200 animate-pulse'>
 
-                    </div>
-                </div>
+                      </div>
+                  </div>
 
-                <div className='flex flex-col gap-3 '>
-                    <div className='h-[250px] w-[180px] bg-gray-200 animate-pulse max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px]  headCard overflow-hidden relative transition duration-300  '>
+                  <div className='flex flex-col gap-3 '>
+                      <div className='h-[250px] w-[180px] bg-gray-200 animate-pulse max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px]  headCard overflow-hidden relative transition duration-300  '>
 
-                    </div>
-                    <div className='h-[20px] w-[120px] bg-gray-200 animate-pulse'>
+                      </div>
+                      <div className='h-[20px] w-[120px] bg-gray-200 animate-pulse'>
 
-                    </div>
-                </div>
-                <div className='flex flex-col gap-3 '>
-                    <div className='h-[250px] w-[180px] bg-gray-200 animate-pulse max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px]  headCard overflow-hidden relative transition duration-300  '>
+                      </div>
+                  </div>
+                  <div className='flex flex-col gap-3 '>
+                      <div className='h-[250px] w-[180px] bg-gray-200 animate-pulse max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px]  headCard overflow-hidden relative transition duration-300  '>
 
-                    </div>
-                    <div className='h-[20px] w-[120px] bg-gray-200 animate-pulse'>
+                      </div>
+                      <div className='h-[20px] w-[120px] bg-gray-200 animate-pulse'>
 
-                    </div>
-                </div>
-                <div className='flex flex-col gap-3 '>
-                    <div className='h-[250px] w-[180px] bg-gray-200 animate-pulse max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px]  headCard overflow-hidden relative transition duration-300  '>
+                      </div>
+                  </div>
+                  <div className='flex flex-col gap-3 '>
+                      <div className='h-[250px] w-[180px] bg-gray-200 animate-pulse max-lg:h-[230px] max-lg:w-[150px] max-[850px]:h-[200px] max-[850px]:w-[130px]  headCard overflow-hidden relative transition duration-300  '>
 
-                    </div>
-                    <div className='h-[20px] w-[120px] bg-gray-200 animate-pulse'>
+                      </div>
+                      <div className='h-[20px] w-[120px] bg-gray-200 animate-pulse'>
 
-                    </div>
-                </div>
+                      </div>
+                  </div>
 
 
-            </div>
+              </div>
 
               <div className='bg-gray-200 animate-pulse w-[775px] h-[16px] max-[800px]:w-11/12'></div>
           </div>
@@ -286,16 +285,16 @@ const Characters = () => {
 
                 {!clickedShowMore && (!fetchedMore || moreDefaultCharacters.length <= 0) ? (
               <div
-              className='mx-auto my-5 cursor-pointer flex flex-col justify-center items-center w-fit'
-              onClick={() => {
-              showMoreDefaultFetching();
-              setClickedShowMore(true);
-              }}
-              >
-              <div className='font-banger tracking-widest text-xl'>View More</div>
-              <div className='bg-green-500 p-1  rounded-full'>
-              <IoIosArrowDown className='text-xl text-white' />
-              </div>
+                  className='mx-auto my-5 cursor-pointer flex flex-col justify-center items-center w-fit'
+                  onClick={() => {
+                    showMoreDefaultFetching();
+                    setClickedShowMore(true);
+                  }}
+                >
+                <div className='font-banger tracking-widest text-xl'>View More</div>
+                <div className='bg-green-500 p-1  rounded-full'>
+                  <IoIosArrowDown className='text-xl text-white' />
+                </div>
               </div>
               ) : null}
               </div>

@@ -78,12 +78,12 @@ const FavoriteCh = () => {
       {favChrs&&<>{favChrs.length<=0&&<>
         <div className='mb-12 flex p-1 justify-center items-center -mt-14 flex-col font-poopins'>
           <h1 className='text-3xl font-banger mb-5 tracking-widest text-red-500'>Uh-oh!</h1>
-          <p className='text-lg max-sm:text-base'>Looks like you haven't added any favorite characters yet.</p>
-          <p className='max-sm:text-sm'>Let's start building your list of beloved heroes and villains!</p>
+          <p className='text-lg max-sm:text-sm mx-3'>Looks like you haven't added any favorite characters yet.</p>
+          <p className='max-sm:text-xs mx-3'>Let's start building your list of beloved heroes and villains!</p>
           <div className='flex flex-col mt-5 gap-2 '>
             <small className='text-gray-400'>Click below to explore our collection.</small>
             <button onClick={()=>{
-              navigate('/home/comics')
+              navigate('/home')
             }} className='hover:scale-95 transition favorite-btn w-fit mx-auto px-4 py-[5px] border-black border-2 rounded-full font-poopins'>Explore Characters</button>
           </div>
 

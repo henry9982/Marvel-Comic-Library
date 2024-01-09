@@ -15,7 +15,7 @@ import { signOut } from 'firebase/auth'
 import { GoPerson } from "react-icons/go";
 
 const SideBar = () => {
-    const {isSidebarVisible,toggleSidebar,openDialog} = useContext(StateContext)
+    const {isSidebarVisible,toggleSidebar,openDialog,closeDialog} = useContext(StateContext)
     const [userName,setUserName] = useState()
     const [userImg,setUserImage] = useState()
     const navigate = useNavigate()
@@ -30,12 +30,14 @@ const SideBar = () => {
     const signUserOut = async()=>{
         try {
             await signOut(auth)
+            toggleSidebar()
             navigate('/signIn')
         } catch (error) {
             console.error(error);
         }
     }
     const clickToFavCh = ()=>{
+        toggleSidebar()
         if (!userName) {
             openDialog()
             return
@@ -43,6 +45,7 @@ const SideBar = () => {
         navigate('/home/favCharacters')
     }
     const clickToReadLaterCm = ()=>{
+        toggleSidebar()
         if (!userName) {
             openDialog()
             return
@@ -117,7 +120,10 @@ const SideBar = () => {
                     <div className='font-poopins text-sm text-gray-400'>Logout</div>
                     <img src={userImg} alt="" className='w-7 h-7 rounded-full' />
                 </div>
-            </div>:<Link to={'/signIn'} className='w-fit cursor-pointer mx-auto hover:scale-95 transition'>
+            </div>:<div onClick={()=>{
+                navigate('/signIn')
+                toggleSidebar()
+            }} className='w-fit cursor-pointer mx-auto hover:scale-95 transition'>
                 <div className='flex bg-white items-center gap-2 px-1 py-1  rounded-full'>
                     <div>
                         <CiLogin className='text-gray-500 text-xl '/>
@@ -127,7 +133,7 @@ const SideBar = () => {
                         <IoPersonOutline/>
                     </div>
                 </div>
-            </Link>}
+            </div>}
         </div>
 
     </div>

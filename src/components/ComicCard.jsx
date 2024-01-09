@@ -4,7 +4,6 @@ import { FaChevronRight } from "react-icons/fa6";
 import { StateContext } from '../context/StateContext';
 import { useNavigate } from 'react-router-dom';
 import { FaRegStar ,FaStar  } from "react-icons/fa";
-import useAddFavoriteCh from '../hooks/useAddFavoriteCh';
 import { addDoc, collection, deleteDoc, doc, getDocs, query, serverTimestamp, where } from 'firebase/firestore';
 import { auth, db } from '../config/firebase-config';
 import '../styles/Button.css'
@@ -100,7 +99,7 @@ const ComicCard = ({comic}) => {
                         <div className='my-1 '>
                           <div className='font-banger text-white  tracking-widest font-'>Marvel</div>
                           <div className='text-white -mt-1 font-poopins text-[13px] max-[470px]:text-[11px] whitespace-nowrap overflow-auto characterInfoBoxName '>{comic.title}</div>
-                          <div className='text-[12px] mt-1 tracking-wide character-des overflow-auto text-neutral-300 characterInfoBoxDes max-[470px]:text-[11px]'>{comic.description?comic.description:'No description about the character'}</div>
+                          <div className='text-[12px] mt-1 tracking-wide character-des overflow-auto text-neutral-200 characterInfoBoxDes max-[470px]:text-[11px]'>{comic.description?comic.description:'No description about the character'}</div>
                         </div>
                         <a href={detailUrl} target='_blank'  className=' flex justify-between absolute bottom-0 max-sm:-bottom-[1px] max-[400px]:-bottom-[1.10pt] -right-[7px] box-info-btn cursor-pointer w-[115px] max-sm:w-[105px]  max-sm:h-7 max-[470px]:w-[96px] max-[400px]:w-[81px] max-[400px]:h-6 bg-white items-center h-7 overflow-hidden '>
                           <div className='bg-[#EE7214]   h-full flex - justify-center items-center relative'>

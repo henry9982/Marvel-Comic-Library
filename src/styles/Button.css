@@ -109,20 +109,20 @@
   content: '';
   display: block;
   position: absolute;
-  top: 50%; /* Adjust these values to fit your design */
-  left: 50%; /* Adjust these values to fit your design */
+  top: 50%; 
+  left: 50%; 
   transform: translate(-50%, -50%);
   width: 0;
   height: 0;
   border-radius: 50%;
   background: #000;
   transition: width 0.8s ease-in-out, height 0.8s ease-in-out;
-  z-index: -1; /* Ensure the shape stays behind the text */
+  z-index: -1; 
 }
 
 .favorite-btn:hover:after {
-  width: 200px; /* Adjust the size to cover the text */
-  height: 200px; /* Adjust the size to cover the text */
+  width: 200px; 
+  height: 200px; 
 }
 
 .favorite-btn:hover{
