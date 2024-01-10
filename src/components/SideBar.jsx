@@ -69,7 +69,7 @@ const SideBar = () => {
         </div>
 
         <div className=' flex flex-col items-center my-24 gap-5  justify-center'>
-            <div className='-mt-14 '>
+            <div className='-mt-7 '>
                 {userName&&<div className='border-2 border-white rounded-full'>
                     <img src={userImg} className='w-[60px] h-[60px] rounded-full' alt="" />                
                 </div>}
